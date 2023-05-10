@@ -1,4 +1,29 @@
 This Repo contains all programming Questions
+
+Imp Links
+	
+	Data structure : https://medium.com/techie-delight/data-structures-and-algorithms-practice-problems-2810bf3249a4
+	
+	Bit Manipulation : https://medium.com/techie-delight/bit-manipulation-interview-questions-and-practice-problems-27c0e71412e7
+	
+	https://medium.com/@codingfreak
+	
+	Algo : https://www.techiedelight.com/data-structures-and-algorithms-problems/
+	
+	Linked List (leetcode) : https://leetcode.com/tag/linked-list/
+	
+	Queue (LeetCode)  : https://leetcode.com/tag/queue/
+	
+	String : https://leetcode.com/discuss/study-guide/1333049/Collections-of-string-questions-pattern-for-upcoming-placement-2021
+		   https://leetcode.com/tag/string/
+
+
+	1. Round up to the next highest power of 2
+		a. To find the position of MSB set bit and set the pos bit in another num 
+	2. Round up to the previous highest power of 2
+		a. To find the position of MSB set bit and set the (pos -1) bit in another num
+	3. Parity of num   // num of set bits in num , even : even parity
+
 1. Bit Manipulations
 2. List Operations
 3. Min Windows
