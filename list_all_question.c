@@ -1,50 +1,77 @@
+////////////////////////////////////////////////////////////////////////
+	1. Reverse a list using Recursion
+		
+		1. 1->2->3->4->5
+			head --> 1 
+		2. After recursive reversal
+			1-->2<--3<--4--<5 
+			now head ---> 1   and rest --> 5
+		3. now need to create a link b/w 2--> 1
+			head->next->next = head;
+		4. Now end of list means head->next = NULL
+			head->next = NULL
 	
-	Data structure : https://medium.com/techie-delight/data-structures-and-algorithms-practice-problems-2810bf3249a4
+	Node *reverse(Node *head)
+	{
+		If((head== NULL) || (head->next == NULL))
+			return head;
+		
+		Node *rest = reverse(head->next);
+		head->next->next = head;   // to create a link b/w 2->1 , 2 is pointing to 1
+		Head->next = NULL;    // last node  1 ->NULL
+		
+		return rest;
+		
+	}
 	
-	Bit Manipulation : https://medium.com/techie-delight/bit-manipulation-interview-questions-and-practice-problems-27c0e71412e7
+	M-2:  // This is simple methor
+	LIST *reverse(LIST *curr, LIST *prev)
+	{
+	    if(curr == NULL)
+	        return prev;
+	    
+	    LIST *next = curr->next;
+	    curr->next = prev;
+	    prev = curr;
+	    
+	    return  reverse(next, prev);
 	
-	https://medium.com/@codingfreak
+	}
 	
-	Algo : https://www.techiedelight.com/data-structures-and-algorithms-problems/
-	
-	Linked List (leetcode) : https://leetcode.com/tag/linked-list/
-	
-	Queue (LeetCode)  : https://leetcode.com/tag/queue/
-	
-	String : https://leetcode.com/discuss/study-guide/1333049/Collections-of-string-questions-pattern-for-upcoming-placement-2021
-		   https://leetcode.com/tag/string/
+	Int main()
+	{
+		Struct list *head;
+		Insert(10);
+		Insert(12);
+		head= reverse(head, NULL);
+	}
 
-
-	1. Round up to the next highest power of 2
-		a. To find the position of MSB set bit and set the pos bit in another num 
-	2. Round up to the previous highest power of 2
-		a. To find the position of MSB set bit and set the (pos -1) bit in another num
-	3. Parity of num   // num of set bits in num , even : even parity
-	4. List Operation
-		void insert(struct list **head, int data)
+	M3: Without Recursion
+	
+	void reverse_list(struct list **head)
 		{
-		        struct list *ptr;
+		        struct list *prev, *curr, *next;
+		        curr = *head;
+		        prev = NULL;
+		        next = NULL;
 		
-		        ptr = (struct list *)malloc(sizeof(struct list));
-		        ptr->val = data;
-		        ptr->next = NULL;
-		
-		        if(*head != NULL)
+		        while(curr != NULL)
 		        {
-		                struct list *temp = *head;
-		                while(temp->next != NULL) {
-		                        temp = temp->next;
-		                }
+		                // store the next
+		                next = curr->next;
+		                curr->next = prev;    // create a link
 		
-		                temp->next = ptr;
+		                //move the prev and curr ptr by 1
+		                prev = curr;
+		                curr = next;
 		        }
-		        else
-		                *head = ptr;
+
+		        *head = prev;
 		}
-		
+
+///////////////////////////////////////////////////////////////
+	2. Implement Stack using linked list
 	
-	
-	5. Implement Stack using linked list
 		void push(struct list **head, int k)
 		{
 		        struct list *ptr;
@@ -80,8 +107,10 @@
 		        free(tmp);
 		        *head = ptr;
 		}
+
+/////////////////////////////////////////////////////////////////////////////////////
 		
-	6. Implement Queue using linked list
+	3. Implement Queue using linked list
 		void insert(int k)
 		{
 		        struct list *ptr;
@@ -119,9 +148,9 @@
 		
 		        }
 		}
-		
+///////////////////////////////////////////////////////////////////////////////////////////
 
-	6. Remove Duplicate from sorted linked list
+	4. Remove Duplicate from sorted linked list
 		a. IP : 1, 2,2, 3, 4, 4, 5,5 
 		b. Op : 1, 2, 3, 4, 5
 			
@@ -149,8 +178,10 @@
 			                }
 			        }
 			}
-			
-	7. Detect and Remove the loop from list
+	
+///////////////////////////////////////////////////////////////////////////////////
+	
+	5. Detect and Remove the loop from list
 	void detect_remove_loop(struct list *head)
 	{
 	        struct list *slow = head;
@@ -189,27 +220,8 @@
 	
 	}
 	
-	8. Reverse of list
-		void reverse_list(struct list **head)
-		{
-		        struct list *prev, *curr, *next;
-		        curr = *head;
-		        prev = NULL;
-		        next = NULL;
-		
-		        while(curr != NULL)
-		        {
-		                // store the next
-		                next = curr->next;
-		                curr->next = prev;    // create a link
-		
-		                //move the prev and curr ptr by 1
-		                prev = curr;
-		                curr = next;
-		        }
+///////////////////////////////////////////////////////////////////////////////////	
 
-		        *head = prev;
-		}
 		
 	9. Delete all even node from the list
 		void delete_even_node(struct list **head)
@@ -233,7 +245,7 @@
 		        }
 		}
 		
-	
+////////////////////////////////////////////////////////////////////////////////////////
 	10. Detect intersect point of list
 		void detelct_intersect(struct list **head1, struct list **head2)
 		{
@@ -277,7 +289,10 @@
 		                ptr2 = ptr2->next;
 		        }
 		}
-		
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+
 	11. Rotate the list by K
 		
 		struct ListNode* rotateRight(struct ListNode* head, int k){
@@ -307,7 +322,7 @@
 		    tmp->next = NULL;    
 		    return abc;
 		
-		
+////////////////////////////////////////////////////////////////////////////////////////
 	12. Delete Nth node  from End in List
 		1. Take 2 ptr (ptr 1 and ptr2)
 		2. Now move ptr1 upto  k position, means it (len-k+1) position away from end
@@ -331,7 +346,8 @@
 		    ptr->next = ptr->next->next;
 		    return head;
 		}
-		
+
+////////////////////////////////////////////////////////////////////////////////////////
 		
 	13. Swap adjacent pair of node
 		1. IP : 1->2->3->4-NULL
@@ -363,7 +379,8 @@
 		                ptr = tmp->next;
 		        }
 		}
-		
+
+////////////////////////////////////////////////////////////////////////////////////////
 		
 	14. Reverse the node from position n to m
 		struct list *reverse_list_pos_n_m(struct list *head, int n, int m)
@@ -402,7 +419,9 @@
 		        return head;
 		
 		}
-		
+
+
+////////////////////////////////////////////////////////////////////////////////////////
 	15. Remove all elements of list with value k
 		Given the head of a linked list and an integer val, remove all the nodes of the linked list that has Node.val == val, and return the new head.
 		truct ListNode* removeElements(struct ListNode* head, int val){
@@ -426,7 +445,10 @@
 		    }
 		    return head;
 		}
-		
+
+
+////////////////////////////////////////////////////////////////////////////////////////
+
 	16. Check the Linked list is palindrome
 		1. Using stack
 			i. Push all the elements of list in stack  (traversing a list to NULL)
@@ -502,7 +524,8 @@
 		    return k;
 		}
 		
-		
+
+////////////////////////////////////////////////////////////////////////////////////////
 		
 Queue
 	1. Implement stack using queue
@@ -600,5 +623,5 @@ Queue
 		 
 		 * myStackFree(obj);
 		*/
-		3. 
-	
+
+/////////////////////////////////////////////////////////////////////////////////////////////////	
