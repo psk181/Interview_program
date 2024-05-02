@@ -42,7 +42,7 @@ int main()
 		printf("\n");
 	}
 
-// Using array of pointers
+// Using an array of pointers
 
 	int *p[r];
 
@@ -64,6 +64,7 @@ int main()
 	
 	for(i = 0;i < r; i++)
 		free(p[i]);
+	
 // Using Double Ptr
 
 	int **db_ptr;
