@@ -1,30 +1,39 @@
 #include <stdio.h>
 
-
-
 int main()
 {
-	int a[5] = {1, 2, 3,4, 5};
-	int k = 1, p;
-	int n = 5, i;
-	
-	for(i = n-1; i >=0; i--)
-	{
-		p = i - k;
-		if(p < 0) {
-			p = i + n - k;
-		}
-		printf("i : %d   p : %d  %d\n", i, p, a[p]);
-	
-		a[i] = a[p];
-	}
+    int nums[] = {1, 2, 3, 4, 5, 6, 7};
+int numsSize = sizeof(nums) / sizeof(nums[0]);
+    int i , j, tmp;
 
-	for(i = 0; i < n; i++)
-		printf("%d  ", a[i]);
+    // reverse K element from last
+    i = numsSize -k;
+    j =  numsSize -1;
+    while(i < j)
+    {
+        tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+        i++;
+        j--; 
+    }
 
-	printf("\n");
-	
-	return 0;
+    // reverse first K element
+    for(i = 0, j = numsSize-1-k; i < j; i++, j--)
+    {
+        tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+    }
+
+    // reverse Full Array 
+    for(i = 0, j = numsSize-1;i < j; i++, j--)
+    {
+        tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+    }
+
 
 }
 
