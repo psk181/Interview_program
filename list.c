@@ -442,35 +442,66 @@ struct list *reverse_list_pos_n_m(struct list *head, int n, int m)
 	curr = head;
 	int i = 0;
 
+	// prev : To maintain the prev node that point to the next node of revese list
+        // prev->next = reverse_head (nw_prev : that is actually a head in case of simple reverse of list)
+        // curr : to maintain the last node link (right position) 
+	// basically to maintain the last list after reverse of position m 
+	// prev : maintain the link for n nodes and sv_link for after m position 
 	for(i = 1; i < n;i++) {
 		prev = curr;
 		curr = curr->next;
 	}
 
-	struct list *new_head = curr;
-	struct list *tail = NULL;
-	struct list *next = NULL;
-
+	struct list *sv_lint, *nw_prev;;
+	sv_link = curr;
+	nw_prev = NULL;
 	while(i <= m)
 	{
 		next = curr->next;
-		curr->next = tail;
-		tail = curr;
+		curr->next = nw_prev;
+		nw_prev = curr;
 		curr = next;
 		i++;
 	}
 
 	if(prev != NULL)
-		prev->next = tail;
+		prev->next = nw_prev;
 	else
 		head = prev;
 
 	printf("New_head: %d\n", new_head->val);
-	new_head->next = curr;
+	sv_link->>next = curr;
 
 	return head;
 
 }
+
+struct list *reverse_after_n_node(struct list *head, int k)
+{
+        struct list *prev, *curr, *nxt, *tmp;
+        curr = head;
+        int p = 0;
+
+        // set the previuos to Nth node of list 
+        while(p < k) {
+                tmp = curr;
+                curr = curr->next;
+                p++;
+        }
+
+        prev = NULL;
+        while(curr) {
+                nxt = curr->next;
+                curr->next = prev;
+                prev = curr;
+                curr = nxt;
+                p++;
+        }
+
+        tmp->next = prev;
+        return head;
+}
+
 
 void list_display_unique(struct list **head)
 {
