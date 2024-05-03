@@ -237,27 +237,6 @@ void dummy(struct list *head)
 	}
 }
 
-void reverse_list(struct list **head)
-{
-	struct list *prev, *curr, *next;
-	curr = *head;
-	prev = NULL;
-	next = NULL;
-
-	while(curr != NULL)
-	{
-		// store the next
-		next = curr->next;
-		curr->next = prev;    // create a link
-		
-		//move the prev and curr ptr by 1
-		prev = curr;
-		curr = next;
-	}
-	
-	*head = prev;
-}
-
 void detelct_intersect(struct list **head1, struct list **head2)
 {
 	int d;
@@ -408,6 +387,27 @@ void swap_pair_node(struct list **head)
 		tmp = abc;
 		ptr = tmp->next;
 	}
+}
+
+void reverse_list(struct list **head)
+{
+	struct list *prev, *curr, *next;
+	curr = *head;
+	prev = NULL;
+	next = NULL;
+
+	while(curr != NULL)
+	{
+		// store the next
+		next = curr->next;
+		curr->next = prev;    // create a link
+		
+		//move the prev and curr ptr by 1
+		prev = curr;
+		curr = next;
+	}
+	
+	*head = prev;
 }
 
 struct list *reverse_list_pos_n_m(struct list *head, int n, int m)
