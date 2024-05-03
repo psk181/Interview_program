@@ -258,6 +258,31 @@ void reverse_list(struct list **head)
 	*head = prev;
 }
 
+struct list *reverse_n_node(struct list *head, int k)
+{
+        struct list *prev, *curr, *nxt;
+        curr = head;
+        prev = head;
+        int p = 0;
+
+        // set the previuos to Nth node of list 
+        while(p < k) {
+                prev = prev->next;
+                p++;
+        }
+
+        p = 0;
+        while(p < k) {
+                nxt = curr->next;
+                curr->next = prev;
+                prev = curr;
+                curr = nxt;
+                p++;
+        }
+
+        return prev;
+}
+
 void detelct_intersect(struct list **head1, struct list **head2)
 {
 	int d;
