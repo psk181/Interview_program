@@ -34,32 +34,48 @@ int longestValidParentheses(char * s){
     int len = 0;
     int max = 0;
     index_stack[0] = -1;
+	int start = 0;
+	int end  = 0;
 
-    while(s[i++] != '\0');
-        len = i -1;
-
-    for(i = 0; i < len; i++)
+    while(s[i] != '\0')
     {
+	    // Push both index and char to stack
         if(s[i] == '(')
         {
             push_char(s[i]);
             push_index(i);
             printf("PUSH :%d  %d\n", index_stack[top_index], top_index);
         }
-        else {  // closing bracket
-		printf("Closing : i : %d top_char: %d\n", i, top_char);
+        else {  
+		// closing bracket and stack is not empty , means found a correct pair
+		// of parentheses, so pop char and index
+		//printf("Closing : i : %d top_char: %d\n", i, top_char);
             if((top_char != -1) && (char_stack[top_char] == '(')) {
                 pop_char();
                 pop_index();
-                int k =  i - index_stack[top_index];
+		// Find the length curr index - last wrong index 
+                int k =  i - index_stack[top_index];	
                 printf("POP %d  %d  %d\n", max, k, index_stack[top_index]);
-                max = max > k?max:k;
-            }
-            else
-            push_index(i);
-        }
-    }
+                // Below condition is commented to maintain the start and end index, 
+		//max = max > k?max:k;
 
+      		//Below code is needed only to maintain the start and end index
+		if(max  < k)
+		{
+			start = index_stack[top_index] + 1;
+			end = i;
+			max = k;
+		}
+
+            }
+		// Push the wrong index to maintain the len
+            else {
+            push_index(i);
+	    }
+
+	}
+	    i++;
+    }
     return max;
 }
 
