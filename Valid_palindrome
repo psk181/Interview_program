@@ -1,0 +1,55 @@
+LeetCode : 680
+Given a string s, return true if the s can be palindrome after deleting at most one character from it.
+
+ 
+
+Example 1:
+
+Input: s = "aba"
+Output: true
+Example 2:
+
+Input: s = "abca"
+Output: true
+Explanation: You could delete the character 'c'.
+Example 3:
+
+Input: s = "abc"
+Output: false
+/////////////////////////////////////////////////////////////////////////////
+
+bool checkPalindrome(char *s, int st, int en)
+{
+    while(st < en) {
+        if(s[st] != s[en])
+            return 0;
+        st++;
+        en--;
+    }
+    return 1;
+}
+
+
+bool validPalindrome(char* s) {
+
+    int st = 0;
+    int en;
+    int cnt = 0;
+
+    en = strlen(s);
+
+    en--;
+    while(st < en)
+    {
+        if(s[st] == s[en])
+        {
+            st++;
+            en--;
+        }
+        else {
+                return (checkPalindrome(s,st+1, en) || checkPalindrome(s,st, en-1));
+        }
+    }
+    
+    return 1;
+}
